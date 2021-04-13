@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+     <record model="ir.module.category" id="ir_module_category_helpdesk">
+        <field name="name">Helpdesk</field>
+    </record>
+    <record model="res.groups" id="helpdesk_user">
+        <field name="name">User</field>
+        <field name="category_id" ref="ir_module_category_helpdesk" />
+    </record>
+    <record model="res.groups" id="helpdesk_manager">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="ir_module_category_helpdesk" />
+        <field name="implied_ids" eval="[(4, ref('helpdesk_user'))]" />
+    </record>
+    <record model="res.users" id="base.user_root">
+        <field eval="[(4,ref('helpdesk_manager'))]" name="groups_id" />
+    </record>
+</odoo>

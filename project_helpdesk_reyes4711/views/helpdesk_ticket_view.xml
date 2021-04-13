@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_task_form2" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.inherit.view.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="mode">primary</field>
+        <field eval="7" name="priority"/>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="description" string="actions">
+                    <field name="corrective_action" type="html"/>
+                    <field name="preventive_action" type="html"/>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='project_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="helpdesk_ticket_action" model="ir.actions.act_window">
+        <field name="name">helpdesk.ticket.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first helpdesk ticket
+            </p>
+        </field>
+    </record>
+    <menuitem
+    id="helpdesk_ticket_menu_action"
+    name="Tickets"
+    parent="helpdesk_menu_submenu"
+    action="helpdesk_ticket_action"
+    sequence="10"
+  />
+</odoo>

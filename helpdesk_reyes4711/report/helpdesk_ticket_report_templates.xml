@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_helpdesk_ticket_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <h2 class="mt16">
+                    <span t-field="doc.name"/>
+                </h2>
+                <div class="row mt32 mb32" id="informations">
+                    <div class="col-auto col-3 mw-100 mb-2">
+                        <strong>Date:</strong>
+                        <p class="m-0" t-field="doc.creation_date"/>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="doc.partner_id">
+                        <strong>Partner:</strong>
+                        <p class="m-0" t-field="doc.partner_id"></p>
+                    </div>
+                </div>
+                <table class="table table-sm o-main-table">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_description" class="text-left">Description</th>
+                            <th name="th_date" class="text-right">Date</th>
+                            <th name="th_time" class="text-right">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale-tbody">
+                        <t t-foreach="doc.action_ids" t-as="action">
+                            <tr class="bg-200 font-weight-bold">
+                                <td name="td_name"><span t-field="action.name"/></td>
+                                <td name="td_name"><span t-field="action.creation_date"/></td>
+                                <td name="td_name"><span t-field="action.time"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_helpdesk_ticket">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="helpdesk_reyes4711.report_helpdesk_ticket_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>
